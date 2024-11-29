@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trivia Game</title>
+    <link rel="stylesheet" href="trivia.css" />
+  </head>
+  <body>
+    <!-- Start Block  -->
+    <section class="startBlock hide">
+      <div>
+        <h1>Welcome soldier 🐯</h1>
+        <p>
+          This is a small triva game. You can play with your friend with
+          different categories with different difficulty levels.
+        </p>
+        <h2>Points Breakdown</h2>
+        <ul>
+          <li>Easy - 10</li>
+          <li>Medium - 15</li>
+          <li>Hard - 20</li>
+        </ul>
+      </div>
+      <button class="startBlockButton">Start Game</button>
+    </section>
+
+    <!-- Player Setup Block  -->
+    <section class="playerSetupBlock">
+      <div>
+        <h1>Player Setup</h1>
+        <label for="player1">Player 1 : </label><br />
+        <input
+          type="text"
+          id="player1"
+          name="player1"
+          placeholder="Enter Player 1 Name"
+        />
+        <br />
+        <p class="player1ErrorMessage"></p>
+        <label for="player2">Player 2 : </label><br />
+        <input
+          type="text"
+          id="player2"
+          name="player2"
+          placeholder="Enter Player 2 Name"
+        />
+        <br />
+        <p class="player2ErrorMessage"></p>
+        <label for="quizCategory">Select Quiz Category : </label>
+        <select name="quizCategory" id="quizCategory">
+          <option value="music">Music</option>
+          <option value="science">Science</option>
+          <option value="food_and_drink">Food and Drink</option>
+          <option value="sport_and_leisure">Sports</option>
+          <option value="general_knowledge">General Knowledge</option>
+          <option value="arts_and_literature">Arts and Literature</option>
+          <option value="geography">Geography</option>
+          <option value="history">History</option>
+          <option value="flim_and_tv">Flim and Television</option>
+          <option value="society_and_culture">Society and Culture</option>
+        </select>
+      </div>
+      <button class="playerSetupBlockButton">Next</button>
+    </section>
+    <!-- Confirmation Block  -->
+    <section class="confirmationBlock hide">
+      <div>
+        <h1>Are you Ready ?</h1>
+        <p class="player-1"></p>
+        <p class="player-2"></p>
+        <h2 class="categoryDisplay"></h2>
+      </div>
+      <div class="comfimationBlock-button-layout">
+        <button class="confirmationBlockBackButton">Back</button>
+        <button class="confirmationBlockStartButton">Start Game</button>
+      </div>
+    </section>
+    <section class="quizDisplayBlock hide">Quiz Display Block</section>
+    <section class="resultBlock hide">Result Display Block</section>
+    <section class="exitBlock hide">Exit Block</section>
+  </body>
+  <script src="trivia.js"></script>
+</html>

@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: monospace;
+}
+.hide {
+  display: none !important;
+}
+
+/* Global selectors */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: 10rem;
+}
+
+section {
+  border: 1px solid black;
+  height: 40rem;
+  width: 35rem;
+  padding: 2.5rem;
+  border-radius: 3rem 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+}
+button:active {
+  transform: scale(0.85);
+}
+
+/* Block-Specific */
+/* Start Block  */
+.startBlock > div > p {
+  padding: 3rem 0;
+}
+
+.startBlock > div > ul > li {
+  margin: 10px 0;
+  padding: 0 3rem;
+  list-style-type: none;
+}
+
+.startBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Player Setup Block  */
+
+.playerSetupBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.playerSetupBlock > div > h1 {
+  margin-bottom: 3rem;
+}
+.playerSetupBlock > div > input {
+  padding: 0.5rem 1rem;
+  width: 20rem;
+}
+
+input {
+  margin: 0.5rem 0;
+}
+.playerSetupBlock > div > p {
+  color: red;
+  margin-bottom: 2rem;
+}
+select {
+  padding: 0.5rem 1rem;
+  margin: 2rem 0;
+}
+
+/* Comfiramtion Block*/
+.confirmationBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.confirmationBlock > div > h1 {
+  margin-bottom: 3rem;
+}
+
+.confirmationBlock > div > p {
+  font-size: 1.2rem;
+  margin: 1rem 5rem;
+}
+.confirmationBlock > div > h2 {
+  font-size: 1.5rem;
+  margin: 3rem 3rem;
+  text-align: center;
+}
+
+.comfimationBlock-button-layout {
+  display: flex;
+  justify-content: space-evenly;
+}
