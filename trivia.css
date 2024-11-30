@@ -107,3 +107,23 @@ select {
   display: flex;
   justify-content: space-evenly;
 }
+
+/*Quiz Questions Block */
+.playersTurnAndDifficulty {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+}
+
+.quizDisplayBlock > div >  {
+  margin:3rem 2rem ;
+}
+.quizDisplayBlock > div > div > button {
+  width: 12rem;
+}
+
+.quizDisplayBlock > div > .optionsPart {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 2rem;
+}

@@ -2,12 +2,18 @@
 let startBlock = document.querySelector(".startBlock");
 let playerSetupBlock = document.querySelector(".playerSetupBlock");
 let confirmationBlock = document.querySelector(".confirmationBlock");
+let quizDisplayBlock = document.querySelector(".quizDisplayBlock");
 
 //Variables using in Other Blocks
 let player1Name;
 let player2Name;
 let alreadySelectedCategories = [];
 let quizQuestions = [];
+let quizOptions = [];
+let questionIndex = 0;
+let playerIndex = 0;
+let player1Score = 0;
+let player2Score = 0;
 
 //Start Block
 let startBlockButton = document.querySelector(".startBlockButton");
@@ -96,4 +102,52 @@ confirmationBlockBackButton.addEventListener("click", () => {
 
 confirmationStartBackButton.addEventListener("click", () => {
   console.log("displayQuestion function invoked");
+  confirmationBlock.classList.add("hide");
+  quizDisplayBlock.classList.remove("hide");
+  feedQuestion();
 });
+
+//Quiz Block
+let questionElement = document.querySelector(".question");
+let optionButton = document;
+let option1Element = document.querySelector(".option1");
+let option2Element = document.querySelector(".option2");
+let option3Element = document.querySelector(".option3");
+let option4Element = document.querySelector(".option4");
+let playerTurnIndicatorElement = document.querySelector(".playerTurnIndicator");
+let difficultyLevelIndicator = document.querySelector(
+  ".difficultyLevelIndicator"
+);
+
+const feedQuestion = () => {
+  console.log(quizQuestions.length);
+  if (quizQuestions.length == 0) {
+    questionElement.textContent = "Loading...";
+    option1Element.textContent = "Loading...";
+    option2Element.textContent = "Loading...";
+    option3Element.textContent = "Loading...";
+    option4Element.textContent = "Loading...";
+  } else if (quizQuestions.length > 0) {
+    quizOptions = [
+      quizQuestions[questionIndex].correctAnswer,
+      ...quizQuestions[questionIndex].incorrectAnswers,
+    ];
+    shuffleOptions(quizOptions);
+    difficultyLevelIndicator.textContent = `Difficulty : ${quizQuestions[questionIndex].difficulty}`;
+    questionElement.textContent = quizQuestions[questionIndex].question.text;
+    option1Element.textContent = quizOptions[0];
+    option2Element.textContent = quizOptions[1];
+    option3Element.textContent = quizOptions[2];
+    option4Element.textContent = quizOptions[3];
+  }
+};
+
+//Helper Function for Shuffling Options
+const shuffleOptions = (optionsArray) => {
+  for (let i = 0; i < optionsArray.length; i++) {
+    let j = Math.floor(Math.random() * 4);
+    let temp = optionsArray[i];
+    optionsArray[i] = optionsArray[j];
+    optionsArray[j] = temp;
+  }
+};
