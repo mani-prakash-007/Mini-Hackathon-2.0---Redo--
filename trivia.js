@@ -178,13 +178,7 @@ resultBlockExitButton.addEventListener("click", () => {
 
 //Helper Function to feed question in page
 const feedQuestion = () => {
-  if (quizQuestions.length == 0) {
-    questionElement.textContent = "Loading...";
-    option1Element.textContent = "Loading...";
-    option2Element.textContent = "Loading...";
-    option3Element.textContent = "Loading...";
-    option4Element.textContent = "Loading...";
-  } else if (questionIndex > quizQuestions.length - 1) {
+  if (questionIndex > quizQuestions.length - 1) {
     document.querySelector(`.${categorySelectionElement.value}`).remove();
     quizDisplayBlock.classList.add("hide");
     resultBlock.classList.remove("hide");
@@ -200,7 +194,9 @@ const feedQuestion = () => {
     difficultyLevelIndicator.textContent = ` ${quizQuestions[questionIndex].difficulty}`;
     playerTurnIndicatorElement.textContent =
       playerIndex == 0 ? `${player1Name}'s Turn` : `${player2Name}'s Name`;
-    questionElement.textContent = quizQuestions[questionIndex].question.text;
+    questionElement.textContent = `${questionIndex + 1}.${
+      quizQuestions[questionIndex].question.text
+    }`;
     option1Element.textContent = quizOptions[0];
     option2Element.textContent = quizOptions[1];
     option3Element.textContent = quizOptions[2];
