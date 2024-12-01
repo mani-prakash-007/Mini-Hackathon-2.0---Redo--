@@ -19,6 +19,7 @@ let player2Score = 0;
 //Start Block
 let startBlockButton = document.querySelector(".startBlockButton");
 
+//Event Listener - Start Block
 startBlockButton.addEventListener("click", () => {
   startBlock.classList.add("hide");
   playerSetupBlock.classList.remove("hide");
@@ -35,10 +36,10 @@ let player1NameDisplayElement = document.querySelector(".player-1");
 let player2NameDisplayElement = document.querySelector(".player-2");
 let categoryDisplay = document.querySelector(".categoryDisplay");
 
+//Event Listeners - Playersetup Block
 playerSetupBlockButton.addEventListener("click", () => {
   player1Name = player1Element.value.trim();
   player2Name = player2Element.value.trim();
-  console.log(categorySelectionElement.value);
   if (!player1Name) {
     player1ErrorMessage.textContent = "Enter Player-1 Name 🙄";
     player2ErrorMessage.textContent = "";
@@ -59,7 +60,6 @@ playerSetupBlockButton.addEventListener("click", () => {
     generateQuestions(categorySelectionElement.value);
     playerSetupBlock.classList.add("hide");
     confirmationBlock.classList.remove("hide");
-    console.log(document.querySelector(`.${categorySelectionElement.value}`));
   }
 });
 
@@ -82,13 +82,9 @@ const generateQuestions = async (category) => {
     ...(await mediumQuestions.json()),
     ...(await hardQuestions.json()),
   ];
-  quizQuestions.forEach((element) => {
-    console.log(element);
-  });
 };
 
 //Confirmation Block
-
 let confirmationBlockBackButton = document.querySelector(
   ".confirmationBlockBackButton"
 );
@@ -99,6 +95,7 @@ let questionLoaderIndicator = document.querySelector(
   ".questionLoaderIndicator"
 );
 
+//Event Listener - Confirmation Block
 confirmationBlockBackButton.addEventListener("click", () => {
   quizQuestions = [];
   questionLoaderIndicator.textContent = "";
@@ -106,8 +103,8 @@ confirmationBlockBackButton.addEventListener("click", () => {
   playerSetupBlock.classList.remove("hide");
 });
 
+//Event Listener - Confirmation Block
 confirmationStartBackButton.addEventListener("click", () => {
-  console.log(quizQuestions);
   if (quizQuestions.length == 0) {
     questionLoaderIndicator.textContent =
       "Loading Questions. Click Start again...!!!";
@@ -131,7 +128,8 @@ let playerTurnIndicatorElement = document.querySelector(".playerTurnIndicator");
 let difficultyLevelIndicator = document.querySelector(
   ".difficultyLevelIndicator"
 );
-//Adding Eventlistener for Switching Question
+
+//Event Listener - Quiz Block
 for (let i = 0; i < optionButton.length; i++) {
   optionButton[i].addEventListener("click", () => {
     checkAnswersAndAddScore(
@@ -155,9 +153,8 @@ let resultBlockRestartButton = document.querySelector(
 let categoryOptions = document.getElementsByTagName("option");
 let resultBlockExitButton = document.querySelector(".resultBlockExitButton");
 
-//Event Listeners
+//Event Listener - Result Block
 resultBlockRestartButton.addEventListener("click", () => {
-  console.log("Category Options : ", categoryOptions);
   if (categoryOptions.length == 0) {
     alert("You Played All category...");
     return;
@@ -173,6 +170,7 @@ resultBlockRestartButton.addEventListener("click", () => {
   resultBlock.classList.add("hide");
   playerSetupBlock.classList.remove("hide");
 });
+//Event Listener - Result Block
 resultBlockExitButton.addEventListener("click", () => {
   resultBlock.classList.add("hide");
   exitBlock.classList.remove("hide");
@@ -180,7 +178,6 @@ resultBlockExitButton.addEventListener("click", () => {
 
 //Helper Function to feed question in page
 const feedQuestion = () => {
-  console.log(quizQuestions.length);
   if (quizQuestions.length == 0) {
     questionElement.textContent = "Loading...";
     option1Element.textContent = "Loading...";
@@ -249,6 +246,7 @@ const dificultyScoreValuator = (difficultyType) => {
   }
 };
 
+//Helper Function to declare winner
 const declareWinner = (player1Point, player2Point) => {
   if (player1Point > player2Point) {
     resultDeclarationElement.textContent = `${player1Name} wins...!!!`;
@@ -258,5 +256,3 @@ const declareWinner = (player1Point, player2Point) => {
     resultDeclarationElement.textContent = `Tie Game...!!!`;
   }
 };
-
-//Helper function to Restart game
