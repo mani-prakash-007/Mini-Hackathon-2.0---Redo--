@@ -49,16 +49,28 @@
         <p class="player2ErrorMessage"></p>
         <label for="quizCategory">Select Quiz Category : </label>
         <select name="quizCategory" id="quizCategory">
-          <option value="music">Music</option>
-          <option value="science">Science</option>
-          <option value="food_and_drink">Food and Drink</option>
-          <option value="sport_and_leisure">Sports</option>
-          <option value="general_knowledge">General Knowledge</option>
-          <option value="arts_and_literature">Arts and Literature</option>
-          <option value="geography">Geography</option>
-          <option value="history">History</option>
-          <option value="flim_and_tv">Flim and Television</option>
-          <option value="society_and_culture">Society and Culture</option>
+          <option class="music" value="music">Music</option>
+          <option class="science" value="science">Science</option>
+          <option class="food_and_drink" value="food_and_drink">
+            Food and Drink
+          </option>
+          <option class="sport_and_leisure" value="sport_and_leisure">
+            Sports
+          </option>
+          <option class="general_knowledge" value="general_knowledge">
+            General Knowledge
+          </option>
+          <option class="arts_and_literature" value="arts_and_literature">
+            Arts and Literature
+          </option>
+          <option class="geography" value="geography">Geography</option>
+          <option class="history" value="history">History</option>
+          <option class="flim_and_tv" value="flim_and_tv">
+            Flim and Television
+          </option>
+          <option class="society_and_culture" value="society_and_culture">
+            Society and Culture
+          </option>
         </select>
       </div>
       <button class="playerSetupBlockButton">Next</button>
@@ -70,6 +82,7 @@
         <p class="player-1"></p>
         <p class="player-2"></p>
         <h2 class="categoryDisplay"></h2>
+        <p class="questionLoaderIndicator"></p>
       </div>
       <div class="comfimationBlock-button-layout">
         <button class="confirmationBlockBackButton">Back</button>
@@ -82,12 +95,12 @@
         <h1>Questions</h1>
         <div class="playersTurnAndDifficulty">
           <p class="playerTurnIndicator">Player's Turn</p>
-          <p class="difficultyLevelIndicator">Difficulty : Easy</p>
+          <p>
+            Difficulty :
+            <span class="difficultyLevelIndicator"></span>
+          </p>
         </div>
-        <h2 class="question">
-          Which American rapper, producer and actor released the song 'Lose
-          Yourself'?
-        </h2>
+        <h2 class="question">Question</h2>
         <div class="optionsPart">
           <button class="optionButton option1">Option 1</button>
           <button class="optionButton option2">Option 2</button>
@@ -97,9 +110,30 @@
           <button class="optionButton option4">Option 4</button>
         </div>
       </div>
+      <p>Take Some time to answer. Click the correct options...</p>
     </section>
-    <section class="resultBlock hide">Result Display Block</section>
-    <section class="exitBlock hide">Exit Block</section>
+    <!-- Result Block  -->
+    <section class="resultBlock hide">
+      <div>
+        <h1>It's Show Time...🎉</h1>
+        <h2 class="resultDeclaration">Loading...</h2>
+        <div>
+          <p class="player1ScoreDisplay">Loading...</p>
+          <p class="player2ScoreDisplay">Loading...</p>
+        </div>
+      </div>
+      <div class="resultBlockButtons">
+        <button class="resultBlockRestartButton">Restart Game</button>
+        <button class="resultBlockExitButton">Exit Game</button>
+      </div>
+    </section>
+    <!-- Exit Block  -->
+    <section class="exitBlock hide">
+      <div>
+        <h1>Thanks for Playing 😍</h1>
+        <p>Have a Nice Day...!!!</p>
+      </div>
+    </section>
   </body>
   <script src="trivia.js"></script>
 </html>

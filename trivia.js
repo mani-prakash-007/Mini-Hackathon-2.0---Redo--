@@ -3,11 +3,12 @@ let startBlock = document.querySelector(".startBlock");
 let playerSetupBlock = document.querySelector(".playerSetupBlock");
 let confirmationBlock = document.querySelector(".confirmationBlock");
 let quizDisplayBlock = document.querySelector(".quizDisplayBlock");
+let resultBlock = document.querySelector(".resultBlock");
+let exitBlock = document.querySelector(".exitBlock");
 
 //Variables using in Other Blocks
 let player1Name;
 let player2Name;
-let alreadySelectedCategories = [];
 let quizQuestions = [];
 let quizOptions = [];
 let questionIndex = 0;
@@ -58,6 +59,7 @@ playerSetupBlockButton.addEventListener("click", () => {
     generateQuestions(categorySelectionElement.value);
     playerSetupBlock.classList.add("hide");
     confirmationBlock.classList.remove("hide");
+    console.log(document.querySelector(`.${categorySelectionElement.value}`));
   }
 });
 
@@ -82,7 +84,6 @@ const generateQuestions = async (category) => {
   ];
   quizQuestions.forEach((element) => {
     console.log(element);
-    console.log(element.difficulty);
   });
 };
 
@@ -94,22 +95,34 @@ let confirmationBlockBackButton = document.querySelector(
 let confirmationStartBackButton = document.querySelector(
   ".confirmationBlockStartButton"
 );
+let questionLoaderIndicator = document.querySelector(
+  ".questionLoaderIndicator"
+);
 
 confirmationBlockBackButton.addEventListener("click", () => {
+  quizQuestions = [];
+  questionLoaderIndicator.textContent = "";
   confirmationBlock.classList.add("hide");
   playerSetupBlock.classList.remove("hide");
 });
 
 confirmationStartBackButton.addEventListener("click", () => {
-  console.log("displayQuestion function invoked");
+  console.log(quizQuestions);
+  if (quizQuestions.length == 0) {
+    questionLoaderIndicator.textContent =
+      "Loading Questions. Click Start again...!!!";
+    return;
+  } else {
+    feedQuestion();
+    questionLoaderIndicator.textContent = "";
+  }
   confirmationBlock.classList.add("hide");
   quizDisplayBlock.classList.remove("hide");
-  feedQuestion();
 });
 
 //Quiz Block
 let questionElement = document.querySelector(".question");
-let optionButton = document;
+let optionButton = document.querySelectorAll(".optionButton");
 let option1Element = document.querySelector(".option1");
 let option2Element = document.querySelector(".option2");
 let option3Element = document.querySelector(".option3");
@@ -118,7 +131,54 @@ let playerTurnIndicatorElement = document.querySelector(".playerTurnIndicator");
 let difficultyLevelIndicator = document.querySelector(
   ".difficultyLevelIndicator"
 );
+//Adding Eventlistener for Switching Question
+for (let i = 0; i < optionButton.length; i++) {
+  optionButton[i].addEventListener("click", () => {
+    checkAnswersAndAddScore(
+      optionButton[i].textContent,
+      questionIndex,
+      playerIndex
+    );
+    questionIndex++;
+    playerIndex = playerIndex == 0 ? 1 : 0;
+    feedQuestion();
+  });
+}
 
+//Result Block
+let resultDeclarationElement = document.querySelector(".resultDeclaration");
+let player1ScoreDisplayElement = document.querySelector(".player1ScoreDisplay");
+let player2ScoreDisplayElement = document.querySelector(".player2ScoreDisplay");
+let resultBlockRestartButton = document.querySelector(
+  ".resultBlockRestartButton"
+);
+let categoryOptions = document.getElementsByTagName("option");
+let resultBlockExitButton = document.querySelector(".resultBlockExitButton");
+
+//Event Listeners
+resultBlockRestartButton.addEventListener("click", () => {
+  console.log("Category Options : ", categoryOptions);
+  if (categoryOptions.length == 0) {
+    alert("You Played All category...");
+    return;
+  }
+  player1Name = "";
+  player2Name = "";
+  quizQuestions = [];
+  quizOptions = [];
+  questionIndex = 0;
+  playerIndex = 0;
+  player1Score = 0;
+  player2Score = 0;
+  resultBlock.classList.add("hide");
+  playerSetupBlock.classList.remove("hide");
+});
+resultBlockExitButton.addEventListener("click", () => {
+  resultBlock.classList.add("hide");
+  exitBlock.classList.remove("hide");
+});
+
+//Helper Function to feed question in page
 const feedQuestion = () => {
   console.log(quizQuestions.length);
   if (quizQuestions.length == 0) {
@@ -127,13 +187,22 @@ const feedQuestion = () => {
     option2Element.textContent = "Loading...";
     option3Element.textContent = "Loading...";
     option4Element.textContent = "Loading...";
+  } else if (questionIndex > quizQuestions.length - 1) {
+    document.querySelector(`.${categorySelectionElement.value}`).remove();
+    quizDisplayBlock.classList.add("hide");
+    resultBlock.classList.remove("hide");
+    declareWinner(player1Score, player2Score);
+    player1ScoreDisplayElement.textContent = `${player1Name}'s Score : ${player1Score}`;
+    player2ScoreDisplayElement.textContent = `${player2Name}'s Score : ${player2Score}`;
   } else if (quizQuestions.length > 0) {
     quizOptions = [
       quizQuestions[questionIndex].correctAnswer,
       ...quizQuestions[questionIndex].incorrectAnswers,
     ];
     shuffleOptions(quizOptions);
-    difficultyLevelIndicator.textContent = `Difficulty : ${quizQuestions[questionIndex].difficulty}`;
+    difficultyLevelIndicator.textContent = ` ${quizQuestions[questionIndex].difficulty}`;
+    playerTurnIndicatorElement.textContent =
+      playerIndex == 0 ? `${player1Name}'s Turn` : `${player2Name}'s Name`;
     questionElement.textContent = quizQuestions[questionIndex].question.text;
     option1Element.textContent = quizOptions[0];
     option2Element.textContent = quizOptions[1];
@@ -151,3 +220,43 @@ const shuffleOptions = (optionsArray) => {
     optionsArray[j] = temp;
   }
 };
+
+//Helper Function to add scores
+const checkAnswersAndAddScore = (
+  answer,
+  questionIndexNumber,
+  playerIndexNumber
+) => {
+  if (quizQuestions[questionIndex].correctAnswer == answer) {
+    let questionScore = dificultyScoreValuator(
+      quizQuestions[questionIndexNumber].difficulty
+    );
+    playerIndexNumber == 0
+      ? (player1Score += questionScore)
+      : (player2Score += questionScore);
+  }
+};
+
+//helper function to give scores based on difficulty
+const dificultyScoreValuator = (difficultyType) => {
+  switch (difficultyType) {
+    case "easy":
+      return 10;
+    case "medium":
+      return 15;
+    case "hard":
+      return 20;
+  }
+};
+
+const declareWinner = (player1Point, player2Point) => {
+  if (player1Point > player2Point) {
+    resultDeclarationElement.textContent = `${player1Name} wins...!!!`;
+  } else if (player1Point < player2Point) {
+    resultDeclarationElement.textContent = `${player2Name} wins...!!!`;
+  } else {
+    resultDeclarationElement.textContent = `Tie Game...!!!`;
+  }
+};
+
+//Helper function to Restart game

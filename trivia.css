@@ -107,6 +107,9 @@ select {
   display: flex;
   justify-content: space-evenly;
 }
+.questionLoaderIndicator {
+  color: rgb(241, 195, 11);
+}
 
 /*Quiz Questions Block */
 .playersTurnAndDifficulty {
@@ -115,15 +118,66 @@ select {
   padding: 2rem 2rem;
 }
 
-.quizDisplayBlock > div >  {
-  margin:3rem 2rem ;
+.quizDisplayBlock > div > {
+  margin: 3rem 2rem;
 }
 .quizDisplayBlock > div > div > button {
   width: 12rem;
 }
-
+.quizDisplayBlock{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .quizDisplayBlock > div > .optionsPart {
   display: flex;
   justify-content: space-between;
   margin: 2rem 2rem;
+}
+.question {
+  /* border: 1px solid black; */
+  height: 6rem;
+  margin: 1rem 0;
+  text-align: justify;
+}
+
+/* Result Block*/
+.resultBlock > div > h2 {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.resultBlock > div > div {
+  border: 1px solid black;
+  padding: 1rem 2rem;
+}
+.resultBlock > div > div > p {
+  margin: 1rem 0;
+}
+.resultBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.resultBlockButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.resultBlockButtons > button {
+  width: 13rem;
+}
+
+/* Exit Block*/
+.exitBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exitBlock > div > h1 {
+  margin-bottom: 3rem;
+}
+.exitBlock > div > p {
+  font-size: 1.4rem;
+  text-align: center;
 }
